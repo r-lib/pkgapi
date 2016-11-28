@@ -3,12 +3,21 @@ Title: Map Function Calls
 Version: 1.0.0
 Author: Gábor Csárdi
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
-Description: Create the map function calls in a package, including calls to imported
-  packages.
+Description: Create the map function calls in a package, including calls
+    to imported packages.
 License: MIT + file LICENSE
 LazyData: true
 URL: https://github.com/gaborcsardi/functionmap2
 BugReports: https://github.com/gaborcsardi/functionmap2/issues
 RoxygenNote: 5.0.1.9000
+Roxygen: list(markdown = TRUE)
+Imports:
+    callr,
+    pkgload,
+    tools,
+    withr
+Remotes:
+    r-pkgs/pkgload
 Suggests: 
     testthat
+Encoding: UTF-8
