@@ -48,7 +48,7 @@ map_package <- function(path = ".") {
   ## we also find the targets of the calls, by simply evaluating the
   ## the names of the called functions, in the package environment.
 
-  prep <- prepare_package(path, calls$str)
+  prep <- extract_api(path, calls$str)
 
   defs <- function_defs(prep$functions, prep$exports)
   calls$to <- ifelse(
