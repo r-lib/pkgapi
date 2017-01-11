@@ -26,7 +26,7 @@
 #' @keywords internal
 #' @importFrom callr r_vanilla
 
-prepare_package <- function(path, targets) {
+prepare_package <- function(path, targets = character()) {
 
   r_vanilla(
     function(path, targets) {
@@ -34,10 +34,16 @@ prepare_package <- function(path, targets) {
       pkg <- pkgload::as.package(path)
       pkgload::load_all(pkg, export_all = FALSE)
 
-      all_names <- ls(pkgload::ns_env(pkg))
-      objects <- mget(all_names, pkgload::ns_env(pkg))
+      env <- pkgload::ns_env(pkg)
+
+      all_names <- ls(env, all.names = TRUE)
+      objects <- mget(all_names, env)
 
       functions <- Filter(is.function, objects)
+
+      exports <- ls(env$.__NAMESPACE__.$exports, all = TRUE)
+
+      s3_methods <- ls(env$.__S3MethodsTable__., all = TRUE)
 
       imports <- eapply(
         pkgload::imports_env(path),
@@ -46,7 +52,7 @@ prepare_package <- function(path, targets) {
 
       target_funcs <- mget(
         targets,
-        envir = pkgload::ns_env(pkg),
+        envir = env,
         mode = "function",
         inherits = TRUE,
         ifnotfound = NA_character_
@@ -70,7 +76,8 @@ prepare_package <- function(path, targets) {
         version = pkg$version,
         targets = target_envs,
         functions = functions,
-        exports = ls(pkgload::pkg_env(pkg)),
+        exports = exports,
+        s3_methods = s3_methods,
         imports = imports
       )
     },
