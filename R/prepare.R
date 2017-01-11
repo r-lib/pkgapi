@@ -71,14 +71,17 @@ prepare_package <- function(path, targets = character()) {
         }
       )
 
-      list(
-        name = pkg$package,
-        version = pkg$version,
-        targets = target_envs,
-        functions = functions,
-        exports = exports,
-        s3_methods = s3_methods,
-        imports = imports
+      structure(
+        list(
+          name = pkg$package,
+          version = pkg$version,
+          targets = target_envs,
+          functions = functions,
+          exports = exports,
+          s3_methods = s3_methods,
+          imports = imports
+        ),
+        class = "pkgapi"
       )
     },
     libpath = .libPaths(),
