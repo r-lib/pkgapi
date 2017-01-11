@@ -13,15 +13,15 @@
 #'
 #' @param path package root
 #' @param targets character vector, function call targets to find
-#' @return List with components `name`, `version`, `targets`, `functions`,
-#'   `exports`, `imports`.
-#'   `name` is the package name.
-#'   `version` is the vesion of the package.
-#'   `targets` is a character vector, the names of the environments where
-#'   each target was found.
-#'   `functions` is a list of functions, with source references.
-#'   `exports` is a character vector of exported objects.
-#'   `imports` is a named list of environment names, one for each import.
+#' @return Named list with components:
+#'   - `name` is the package name.
+#'   - `version` is the vesion of the package.
+#'   - `targets` is a character vector, the names of the environments where
+#'     each target was found.
+#'   - `functions` is a list of functions, with source references.
+#'   - `exports` is a character vector of exported objects.
+#'   - `s3_methods` is a character vector of declared S3 methods.
+#'   - `imports` is a named list of environment names, one for each import.
 #'
 #' @keywords internal
 #' @importFrom callr r_vanilla
