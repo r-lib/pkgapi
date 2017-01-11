@@ -3,7 +3,7 @@ Title: Map Function Calls
 Version: 1.0.0
 Author: Gábor Csárdi
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
-Description: Create the map function calls in a package, including calls
+Description: Create the map of function calls in a package, including calls
     to imported packages.
 License: MIT + file LICENSE
 LazyData: true
