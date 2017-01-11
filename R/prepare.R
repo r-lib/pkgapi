@@ -25,8 +25,9 @@
 #'
 #' @keywords internal
 #' @importFrom callr r_vanilla
+#' @export
 
-prepare_package <- function(path = ".", targets = character()) {
+extract_api <- function(path = ".", targets = character()) {
 
   r_vanilla(
     function(path, targets) {
