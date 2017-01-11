@@ -26,7 +26,7 @@
 #' @keywords internal
 #' @importFrom callr r_vanilla
 
-prepare_package <- function(path, targets = character()) {
+prepare_package <- function(path = ".", targets = character()) {
 
   r_vanilla(
     function(path, targets) {
