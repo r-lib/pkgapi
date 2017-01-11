@@ -2,8 +2,13 @@
 
 S3method(format,pkgapi)
 S3method(print,pkgapi)
+export(api_roclet)
 export(extract_api)
 export(map_package)
+export(roclet_clean.roclet_api)
+export(roclet_output.roclet_api)
+export(roclet_process.roclet_api)
+export(roclet_tags.roclet_api)
 importFrom(callr,r_vanilla)
 importFrom(tools,list_files_with_type)
 importFrom(utils,getParseData)
