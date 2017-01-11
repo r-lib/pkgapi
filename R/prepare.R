@@ -41,9 +41,9 @@ prepare_package <- function(path, targets = character()) {
 
       functions <- Filter(is.function, objects)
 
-      exports <- ls(env$.__NAMESPACE__.$exports, all = TRUE)
+      exports <- ls(env$.__NAMESPACE__.$exports, all.names = TRUE)
 
-      s3_methods <- ls(env$.__S3MethodsTable__., all = TRUE)
+      s3_methods <- ls(env$.__S3MethodsTable__., all.names = TRUE)
 
       imports <- eapply(
         pkgload::imports_env(path),
