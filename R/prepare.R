@@ -13,20 +13,20 @@
 #'
 #' @param path package root
 #' @param targets character vector, function call targets to find
-#' @return List with components `name`, `version`, `targets`, `functions`,
-#'   `exports`, `imports`.
-#'   `name` is the package name.
-#'   `version` is the vesion of the package.
-#'   `targets` is a character vector, the names of the environments where
-#'   each target was found.
-#'   `functions` is a list of functions, with source references.
-#'   `exports` is a character vector of exported objects.
-#'   `imports` is a named list of environment names, one for each import.
+#' @return Named list with components:
+#'   - `name` is the package name.
+#'   - `version` is the vesion of the package.
+#'   - `targets` is a character vector, the names of the environments where
+#'     each target was found.
+#'   - `functions` is a list of functions, with source references.
+#'   - `exports` is a character vector of exported objects.
+#'   - `s3_methods` is a character vector of declared S3 methods.
+#'   - `imports` is a named list of environment names, one for each import.
 #'
 #' @keywords internal
 #' @importFrom callr r_vanilla
 
-prepare_package <- function(path, targets) {
+prepare_package <- function(path, targets = character()) {
 
   r_vanilla(
     function(path, targets) {
@@ -34,10 +34,16 @@ prepare_package <- function(path, targets) {
       pkg <- pkgload::as.package(path)
       pkgload::load_all(pkg, export_all = FALSE)
 
-      all_names <- ls(pkgload::ns_env(pkg))
-      objects <- mget(all_names, pkgload::ns_env(pkg))
+      env <- pkgload::ns_env(pkg)
+
+      all_names <- ls(env, all.names = TRUE)
+      objects <- mget(all_names, env)
 
       functions <- Filter(is.function, objects)
+
+      exports <- ls(env$.__NAMESPACE__.$exports, all.names = TRUE)
+
+      s3_methods <- ls(env$.__S3MethodsTable__., all.names = TRUE)
 
       imports <- eapply(
         pkgload::imports_env(path),
@@ -46,7 +52,7 @@ prepare_package <- function(path, targets) {
 
       target_funcs <- mget(
         targets,
-        envir = pkgload::ns_env(pkg),
+        envir = env,
         mode = "function",
         inherits = TRUE,
         ifnotfound = NA_character_
@@ -70,7 +76,8 @@ prepare_package <- function(path, targets) {
         version = pkg$version,
         targets = target_envs,
         functions = functions,
-        exports = ls(pkgload::pkg_env(pkg)),
+        exports = exports,
+        s3_methods = s3_methods,
         imports = imports
       )
     },

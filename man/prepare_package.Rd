@@ -4,7 +4,7 @@
 \alias{prepare_package}
 \title{Get package data}
 \usage{
-prepare_package(path, targets)
+prepare_package(path, targets = character())
 }
 \arguments{
 \item{path}{package root}
@@ -12,15 +12,17 @@ prepare_package(path, targets)
 \item{targets}{character vector, function call targets to find}
 }
 \value{
-List with components \code{name}, \code{version}, \code{targets}, \code{functions},
-\code{exports}, \code{imports}.
-\code{name} is the package name.
-\code{version} is the vesion of the package.
-\code{targets} is a character vector, the names of the environments where
+Named list with components:
+\itemize{
+\item \code{name} is the package name.
+\item \code{version} is the vesion of the package.
+\item \code{targets} is a character vector, the names of the environments where
 each target was found.
-\code{functions} is a list of functions, with source references.
-\code{exports} is a character vector of exported objects.
-\code{imports} is a named list of environment names, one for each import.
+\item \code{functions} is a list of functions, with source references.
+\item \code{exports} is a character vector of exported objects.
+\item \code{s3_methods} is a character vector of declared S3 methods.
+\item \code{imports} is a named list of environment names, one for each import.
+}
 }
 \description{
 Parse and evaluate code from a package, and store it in an
