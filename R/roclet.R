@@ -20,13 +20,12 @@ roclet_process.roclet_api <- function(x, parsed, base_path,
 #' @export
 roclet_tags.roclet_api <- function(x) {
   list(
-    api = roxygen2::tag_words(0, 1)
+    api = roxygen2::tag_toggle
   )
 }
 
 #' @export
 roclet_output.roclet_api <- function(x, results, base_path, ...) {
-  # FIXME: Get file name from optional argument to @api
   file_name <- "API"
   API <- file.path(base_path, file_name)
 
