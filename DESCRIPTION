@@ -18,6 +18,7 @@ Imports:
     withr
 Remotes:
     r-pkgs/pkgload
-Suggests: 
+Suggests:
+    covr,
     testthat
 Encoding: UTF-8
