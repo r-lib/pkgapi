@@ -35,4 +35,3 @@ While we are at it, we also check the imports of the package,
 and return where each function was imported from.
 }
 \keyword{internal}
-

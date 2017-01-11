@@ -16,4 +16,3 @@ Data frame with columns: \code{name}, \code{file}, \code{line}, \code{col}.
 Table of function definitions
 }
 \keyword{internal}
-

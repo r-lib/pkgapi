@@ -18,4 +18,3 @@ This includes all (unevaluated) code of the package. We use it
 to find all function calls.
 }
 \keyword{internal}
-
