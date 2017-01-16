@@ -41,6 +41,7 @@ extract_api <- function(path = ".", targets = character()) {
       objects <- mget(all_names, env)
 
       functions <- Filter(is.function, objects)
+      data <- Filter(Negate(is.function), objects)
 
       exports <- ls(env$.__NAMESPACE__.$exports, all.names = TRUE)
 
@@ -78,6 +79,7 @@ extract_api <- function(path = ".", targets = character()) {
           version = pkg$version,
           targets = target_envs,
           functions = functions,
+          data = data,
           exports = exports,
           s3_methods = s3_methods,
           imports = imports
