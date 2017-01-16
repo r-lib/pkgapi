@@ -7,8 +7,10 @@ print.pkgapi <- function(x, ...) {
 format.pkgapi <- function(x, ...) {
   c(
     format_caption("API for ", x$name, " package", level = 1),
-    add_caption("Exports", format_exports(x)),
-    add_caption("S3 methods", format_s3_methods(x))
+    add_caption("Exported functions", format_exported_functions(x)),
+    add_caption("S3 methods", format_s3_methods(x)),
+    add_caption("Exported data", format_exported_data(x)),
+    NULL
   )
 }
 
@@ -24,23 +26,20 @@ add_caption <- function(caption, x) {
   }
 }
 
-format_exports <- function(x) {
-  exports <- x$functions[x$exports]
-  unlist(unname(Map(format_export, names(exports), exports)))
+format_exported_functions <- function(x) {
+  exports <- Filter(Negate(is.null), x$functions[x$exports])
+  unlist(unname(Map(format_export_fun, names(exports), exports)))
+}
+
+format_exported_data <- function(x) {
+  exports <- Filter(Negate(is.null), x$data[x$exports])
+  unlist(unname(Map(format_export_data, names(exports), exports)))
 }
 
 format_s3_methods <- function(x) {
   s3_methods <- x$functions[x$s3_methods]
   s3_methods <- Filter(Negate(is.null), s3_methods)
-  unlist(unname(Map(format_export, names(s3_methods), s3_methods)))
-}
-
-format_export <- function(name, value) {
-  if (is.function(value)) {
-    format_export_fun(name, value)
-  } else {
-    format_export_data(name, value)
-  }
+  unlist(unname(Map(format_export_fun, names(s3_methods), s3_methods)))
 }
 
 format_export_fun <- function(name, fun) {
@@ -64,5 +63,5 @@ format_default <- function(lang) {
 }
 
 format_export_data <- function(name, data) {
-  warning("NYI: data for ", name)
+  paste0(name, ": ", paste(class(data), collapse = ", "), " (", mode(data), "[", length(data), "])")
 }
