@@ -12,12 +12,14 @@ api_roclet <- function() {
   roclet("api")
 }
 
+#' @importFrom roxygen2 roclet_process
 #' @export
 roclet_process.roclet_api <- function(x, parsed, base_path,
                                       global_options = list()) {
   format(extract_api(base_path))
 }
 
+#' @importFrom roxygen2 roclet_tags
 #' @export
 roclet_tags.roclet_api <- function(x) {
   list(
@@ -25,6 +27,7 @@ roclet_tags.roclet_api <- function(x) {
   )
 }
 
+#' @importFrom roxygen2 roclet_output
 #' @export
 roclet_output.roclet_api <- function(x, results, base_path, ...) {
   file_name <- "API"
@@ -39,6 +42,7 @@ roclet_output.roclet_api <- function(x, results, base_path, ...) {
   API
 }
 
+#' @importFrom roxygen2 roclet_clean
 #' @export
 roclet_clean.roclet_api <- function(x, base_path) {
   # FIXME: Check if this is "our" file
