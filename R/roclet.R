@@ -6,9 +6,10 @@ ns_tags <- c('api')
 #' the exported interface of a package.
 #'
 #' @export
+#' @importFrom roxygen2 roclet
 #' @api
 api_roclet <- function() {
-  roxygen2::roclet("api")
+  roclet("api")
 }
 
 #' @export
