@@ -20,7 +20,8 @@ Imports:
     withr
 Remotes:
     r-pkgs/pkgload,
-    r-pkgs/usethis
+    r-pkgs/usethis,
+    klutometis/roxygen2
 Suggests:
     covr,
     testthat
