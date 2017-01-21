@@ -19,7 +19,8 @@ Imports:
     usethis,
     withr
 Remotes:
-    r-pkgs/pkgload
+    r-pkgs/pkgload,
+    r-pkgs/usethis
 Suggests:
     covr,
     testthat
