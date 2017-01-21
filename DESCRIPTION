@@ -21,7 +21,7 @@ Imports:
 Remotes:
     r-pkgs/pkgload,
     r-pkgs/usethis,
-    klutometis/roxygen2
+    klutometis/roxygen
 Suggests:
     covr,
     testthat
