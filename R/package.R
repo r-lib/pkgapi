@@ -5,5 +5,5 @@
 #' packages.
 #'
 #' @docType package
-#' @name functionmap2
+#' @name pkgapi
 NULL

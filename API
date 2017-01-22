@@ -1,11 +1,7 @@
-# API for functionmap2 package
+# API for pkgapi package
 
-## Exports
+## Exported functions
 
 api_roclet()
 extract_api(path = ".", targets = character())
 map_package(path = ".")
-roclet_clean.roclet_api(x, base_path)
-roclet_output.roclet_api(x, results, base_path, ...)
-roclet_process.roclet_api(x, parsed, base_path, global_options = list())
-roclet_tags.roclet_api(x)

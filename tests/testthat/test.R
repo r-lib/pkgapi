@@ -1,7 +1,7 @@
 
-context("functionmap2")
+context("pkgapi")
 
-test_that("functionmap2 works", {
+test_that("pkgapi works", {
 
   expect_true(TRUE)
 

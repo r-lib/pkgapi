@@ -1,4 +1,4 @@
-Package: functionmap2
+Package: pkgapi
 Title: Map Function Calls
 Version: 1.0.0
 Author: Gábor Csárdi
@@ -7,10 +7,10 @@ Description: Create the map of function calls in a package, including calls
     to imported packages.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/r-pkgs/functionmap2#readme
-BugReports: https://github.com/r-pkgs/functionmap2/issues
+URL: https://github.com/r-pkgs/pkgapi#readme
+BugReports: https://github.com/r-pkgs/pkgapi/issues
 RoxygenNote: 5.0.1.9000
-Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "functionmap2::api_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "pkgapi::api_roclet"))
 Imports:
     callr,
     pkgload,

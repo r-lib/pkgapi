@@ -1,4 +1,4 @@
 library(testthat)
-library(functionmap2)
+library(pkgapi)
 
-test_check("functionmap2")
+test_check("pkgapi")
