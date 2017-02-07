@@ -30,7 +30,7 @@
 extract_api <- function(path = ".", targets = character()) {
 
   r_vanilla(
-    function(path, targets) {
+    function(path, targets, sort_c) {
       options(keep.source = TRUE)
       pkg <- pkgload::as.package(path)
       pkgload::load_all(pkg, export_all = FALSE)
@@ -80,8 +80,8 @@ extract_api <- function(path = ".", targets = character()) {
           targets = target_envs,
           functions = functions,
           data = data,
-          exports = exports,
-          s3_methods = s3_methods,
+          exports = sort_c(exports),
+          s3_methods = sort_c(s3_methods),
           imports = imports
         ),
         class = "pkgapi"
@@ -89,6 +89,6 @@ extract_api <- function(path = ".", targets = character()) {
     },
     libpath = .libPaths(),
     repos = getOption("repos"),
-    args = list(path = path, targets = targets)
+    args = list(path = path, targets = targets, sort_c = sort_c)
   )
 }
