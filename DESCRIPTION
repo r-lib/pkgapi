@@ -7,8 +7,8 @@ Description: Create the map of function calls in a package, including calls
     to imported packages.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/r-pkgs/pkgapi#readme
-BugReports: https://github.com/r-pkgs/pkgapi/issues
+URL: https://github.com/r-lib/pkgapi#readme
+BugReports: https://github.com/r-lib/pkgapi/issues
 RoxygenNote: 5.0.1.9000
 Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "pkgapi::api_roclet"))
 Imports:
@@ -19,8 +19,8 @@ Imports:
     usethis,
     withr
 Remotes:
-    r-pkgs/pkgload,
-    r-pkgs/usethis,
+    r-lib/pkgload,
+    r-lib/usethis,
     klutometis/roxygen
 Suggests:
     covr,
