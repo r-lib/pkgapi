@@ -37,7 +37,7 @@ roclet_output.roclet_api <- function(x, results, base_path, ...) {
   # FIXME: write_if_different()
   writeLines(results, API)
 
-  usethis::use_build_ignore(file_name)
+  usethis::use_build_ignore(file_name, base_path = base_path)
 
   API
 }
