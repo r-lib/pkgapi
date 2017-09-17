@@ -32,10 +32,9 @@ extract_api <- function(path = ".", targets = character()) {
   r_vanilla(
     function(path, targets, sort_c) {
       options(keep.source = TRUE)
-      pkg <- pkgload::as.package(path)
-      pkgload::load_all(pkg, export_all = FALSE)
-
-      env <- pkgload::ns_env(pkg)
+      pkgload::load_all(path, export_all = FALSE, helpers = FALSE)
+      name <- pkgload::pkg_name(path)
+      env <- pkgload::ns_env(name)
 
       all_names <- ls(env, all.names = TRUE)
       objects <- mget(all_names, env)
@@ -48,7 +47,7 @@ extract_api <- function(path = ".", targets = character()) {
       s3_methods <- ls(env$.__S3MethodsTable__., all.names = TRUE)
 
       imports <- eapply(
-        pkgload::imports_env(path),
+        pkgload::imports_env(name),
         function(x) environmentName(environment(x))
       )
 
@@ -75,8 +74,8 @@ extract_api <- function(path = ".", targets = character()) {
 
       structure(
         list(
-          name = pkg$package,
-          version = pkg$version,
+          name = name,
+          version = pkgload::pkg_version(path),
           targets = target_envs,
           functions = functions,
           data = data,
