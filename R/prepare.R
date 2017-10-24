@@ -44,7 +44,7 @@ extract_api <- function(path = ".", targets = character()) {
 
       exports <- ls(env$.__NAMESPACE__.$exports, all.names = TRUE)
 
-      s3_methods <- ls(env$.__S3MethodsTable__., all.names = TRUE)
+      s3_methods <- env$.__NAMESPACE__.$S3methods[, 3]
 
       imports <- eapply(
         pkgload::imports_env(name),
