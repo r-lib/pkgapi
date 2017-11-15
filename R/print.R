@@ -10,6 +10,7 @@ format.pkgapi <- function(x, ...) {
     add_caption("Exported functions", format_exported_functions(x)),
     add_caption("S3 methods", format_s3_methods(x)),
     add_caption("Exported data", format_exported_data(x)),
+    add_caption("Reexported objects", format_reexported_functions(x)),
     NULL
   )
 }
