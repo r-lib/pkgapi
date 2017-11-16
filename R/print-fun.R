@@ -3,8 +3,18 @@ format_exported_functions <- function(x) {
   unlist(unname(Map(format_export_fun, names(exports), exports)))
 }
 
-format_s3_methods <- function(x) {
-  s3_methods <- x$functions[x$s3_methods]
+format_own_s3_methods <- function(x) {
+  format_s3_methods(x, own = TRUE)
+}
+
+format_foreign_s3_methods <- function(x) {
+  format_s3_methods(x, own = FALSE)
+}
+
+format_s3_methods <- function(x, own) {
+  method_names <- gsub("^([^.]*)[.].*$", "\\1", x$s3_methods)
+  method_is_own <- method_names %in% x$exports
+  s3_methods <- x$functions[ x$s3_methods[method_is_own == own] ]
   s3_methods <- Filter(Negate(is.null), s3_methods)
   unlist(unname(Map(format_export_fun, names(s3_methods), s3_methods)))
 }

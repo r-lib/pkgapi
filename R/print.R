@@ -8,7 +8,8 @@ format.pkgapi <- function(x, ...) {
   c(
     format_caption("API for ", x$name, " package", level = 1),
     add_caption("Exported functions", format_exported_functions(x)),
-    add_caption("S3 methods", format_s3_methods(x)),
+    add_caption("Own S3 methods", format_own_s3_methods(x)),
+    add_caption("Foreign S3 methods", format_foreign_s3_methods(x)),
     add_caption("Exported data", format_exported_data(x)),
     add_caption("Reexported objects", format_reexported_functions(x)),
     NULL
