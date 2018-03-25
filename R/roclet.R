@@ -14,9 +14,8 @@ api_roclet <- function() {
 
 #' @importFrom roxygen2 roclet_process
 #' @export
-roclet_process.roclet_api <- function(x, parsed, base_path,
-                                      global_options = list()) {
-  format(extract_api(base_path))
+roclet_process.roclet_api <- function(x, ...) {
+  invisible()
 }
 
 #' @importFrom roxygen2 roclet_tags
@@ -30,14 +29,17 @@ roclet_tags.roclet_api <- function(x) {
 #' @importFrom roxygen2 roclet_output
 #' @export
 roclet_output.roclet_api <- function(x, results, base_path, ...) {
+  output <- format(extract_api(base_path))
+
   file_name <- "API"
   API <- file.path(base_path, file_name)
 
   # FIXME: Add marker that indicates if this is "our" file
   # FIXME: write_if_different()
-  writeLines(results, API)
+  cat("Writing API\n")
+  writeLines(output, API)
 
-  usethis::use_build_ignore(file_name, base_path = base_path)
+  withr::with_dir(base_path, usethis::use_build_ignore(file_name))
 
   API
 }
