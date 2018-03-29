@@ -23,7 +23,8 @@ find_calls <- function(expr) {
     line2 = pd$line2[fc],
     col1  = pd$col1[fc],
     col2  = pd$col2[fc],
-    str   = pd$text[fc]
+    str   = pd$text[fc],
+    args  = character(length(fc))
   )
 
   ## We fill in explicit :: and ::: call targets here, the rest later
@@ -47,10 +48,29 @@ find_calls <- function(expr) {
           res$to[i] <- paste0(subpd$text[1], "::", subpd$text[3])
         }
       }
+      arg_ids <- arg_ids(pd, call_row)
+      res$args[i] <- paste(pd$text[pd$id %in% arg_ids], collapse = "")
     }
   }
 
   res
+}
+
+arg_ids <- function (pd, rn) {
+  id        <- pd$id[rn]
+  parent_id <- pd$parent[rn]
+  gp_id     <- pd$parent[pd$id == parent_id]
+  descendants <- function (pd, id) {
+    kids <- pd$id[pd$parent == id]
+    if (length(kids) == 0) return(integer(0))
+    terminal <- pd$terminal[pd$parent == id]
+    return(c(kids, unlist(lapply(kids[! terminal], descendants, pd = pd))))
+  }
+  descs <- descendants(pd, gp_id)
+  # from ?getParseData:
+  # "The rows will be ordered by starting position within the source file,
+  # with parent items occurring before their children"
+  return(descs[ descs > id ])
 }
 
 find_caller <- function(calls, idx, defs) {
