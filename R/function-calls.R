@@ -61,7 +61,7 @@ arg_ids <- function (pd, rn) {
   pd$rn <- seq_len(nrow(pd))
   parent <- pd$parent[pd$id == id]
   grandparent <- pd$parent[pd$id == parent]
-  uncles <- pd[pd$parent == grandparent & pd$rn > rn & pd$id != parent, ]
+  uncles <- pd[pd$parent == grandparent & pd$rn > rn & pd$id != parent & pd$token != "COMMENT", ]
 
   return(uncles$id)
 }
