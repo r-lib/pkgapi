@@ -49,7 +49,7 @@ find_calls <- function(expr) {
         }
       }
       arg_ids <- arg_ids(pd, call_row)
-      res$args[i] <- paste(pd$text[pd$id %in% arg_ids], collapse = "")
+      res$args[i] <- paste(utils::getParseText(pd, arg_ids), collapse = " ")
     }
   }
 
@@ -57,21 +57,15 @@ find_calls <- function(expr) {
 }
 
 arg_ids <- function (pd, rn) {
-  id        <- pd$id[rn]
-  parent_id <- pd$parent[rn]
-  gp_id     <- pd$parent[pd$id == parent_id]
-  descendants <- function (pd, id) {
-    kids <- pd$id[pd$parent == id]
-    if (length(kids) == 0) return(integer(0))
-    terminal <- pd$terminal[pd$parent == id]
-    return(c(kids, unlist(lapply(kids[! terminal], descendants, pd = pd))))
-  }
-  descs <- descendants(pd, gp_id)
-  # from ?getParseData:
-  # "The rows will be ordered by starting position within the source file,
-  # with parent items occurring before their children"
-  return(descs[ descs > id ])
+  id <- pd$id[rn]
+  pd$rn <- seq_len(nrow(pd))
+  parent <- pd$parent[pd$id == id]
+  grandparent <- pd$parent[pd$id == parent]
+  uncles <- pd[pd$parent == grandparent & pd$rn > rn & pd$id != parent, ]
+
+  return(uncles$id)
 }
+
 
 find_caller <- function(calls, idx, defs) {
 
