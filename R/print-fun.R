@@ -27,7 +27,7 @@ format_args <- function(args) {
   if (length(args) == 0L) {
     ""
   } else {
-    paste0(names(args), vapply(args, format_default, character(1L)), collapse = ", ")
+    paste0(tick_if_needed(names(args)), vapply(args, format_default, character(1L)), collapse = ", ")
   }
 }
 
@@ -35,6 +35,6 @@ format_default <- function(lang) {
   if (identical(as.character(lang), "")) {
     ""
   } else {
-    paste0(" = ", paste(deparse(lang, width.cutoff = 500), collapse = ""))
+    paste0(" = ", paste(deparse(lang, width.cutoff = 500, backtick = TRUE), collapse = ""))
   }
 }
