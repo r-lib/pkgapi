@@ -14,7 +14,7 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "pkgapi
 Imports:
     callr,
     pkgload,
-    roxygen2,
+    roxygen2 (>= 6.1.0),
     tools,
     usethis,
     withr
