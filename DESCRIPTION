@@ -18,10 +18,6 @@ Imports:
     tools,
     usethis,
     withr
-Remotes:
-    r-lib/pkgload,
-    r-lib/usethis,
-    klutometis/roxygen
 Suggests:
     covr,
     testthat
