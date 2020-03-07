@@ -23,8 +23,10 @@ packages.
 
 ## Installation
 
+Once on CRAN, install the package as usual:
+
 ```{r eval = FALSE}
-source("https://install-github.me/r-lib/pkgapi")
+install.packages("pkgapi")
 ```
 
 ## Usage
