@@ -23,7 +23,8 @@ find_calls <- function(expr) {
     line2 = pd$line2[fc],
     col1  = pd$col1[fc],
     col2  = pd$col2[fc],
-    str   = pd$text[fc]
+    str   = pd$text[fc],
+    args  = character(length(fc))
   )
 
   ## We fill in explicit :: and ::: call targets here, the rest later
@@ -47,11 +48,24 @@ find_calls <- function(expr) {
           res$to[i] <- paste0(subpd$text[1], "::", subpd$text[3])
         }
       }
+      arg_ids <- arg_ids(pd, call_row)
+      res$args[i] <- paste(utils::getParseText(pd, arg_ids), collapse = " ")
     }
   }
 
   res
 }
+
+arg_ids <- function (pd, rn) {
+  id <- pd$id[rn]
+  pd$rn <- seq_len(nrow(pd))
+  parent <- pd$parent[pd$id == id]
+  grandparent <- pd$parent[pd$id == parent]
+  uncles <- pd[pd$parent == grandparent & pd$rn > rn & pd$id != parent & pd$token != "COMMENT", ]
+
+  return(uncles$id)
+}
+
 
 find_caller <- function(calls, idx, defs) {
 
